@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自动轮播</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js"></script>
+    <style>
+        .images{
+          display: flex;
+          align-items: flex-start;
+          transition: all 0.5s;
+        }
+        .images > img{
+          vertical-align: top;
+        }
+        .window{
+          width: 260px;
+          overflow: hidden;
+        }
+        
+      </style>
+</head>
+    
+    <body>
+      <div class="window">
+        <div class="images" id=images>     
+          <img src="https://i.loli.net/2018/12/16/5c15c5690769e.jpg" width=260 alt="西游大镖客" height=450>
+           <img src="https://i.loli.net/2018/12/16/5c15c5688a000.jpg" width=260 alt="地狱火" height=450>
+          <img src="https://i.loli.net/2018/12/16/5c15c569b3385.jpg" width=260 alt="至尊宝" height=450>
+          <img src="https://i.loli.net/2018/12/16/5c15c56ae33b7.jpg" width=260 alt="美猴王" height=450>
+          <img src="https://i.loli.net/2018/12/16/5c15c564d2fb5.jpg" width=260 alt="全息碎影" height=450>
+        </div>
+      </div>
+      <span id=buttons>
+        <span>西游大镖客</span>
+        <span>地狱火</span>
+        <span>至尊宝</span>
+        <span>美猴王</span>
+        <span>全息碎影</span>
+      </span>
+    </body>
+    
+    </html>
