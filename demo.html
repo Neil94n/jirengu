@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>浮层</title>
+        <style>
+            div.layer {
+                position: absolute;
+                top: 50px;
+                left: 35%;
+                width: 500px;
+                height: 500px;
+                background: #eee;
+                display: none;
+            }
+
+            .layer {
+                border-radius: 50%;
+            }
+
+            #btn_s {
+                text-align: center;
+            }
+
+            #btn {
+                padding: 10px 20px;
+                color: #fff;
+                border: 1px solid #fff;
+                background: #f08200;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="btn_s">
+            <button id="btn">我叫按钮</button>
+        </div>
+        <div id="floats" class="layer">
+        </div>
+    </body>
+
+</html>
+<script>
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        let status = floats.style.display;
+        if(status === '') {
+            floats.style.display = 'block';
+        } else if(status === 'none') {
+            floats.style.display = 'block';
+        } else if(status === 'block') {
+            floats.style.display = 'none';
+        }
+    })
+    floats.addEventListener('click', function(e) {
+        e.stopPropagation();
+    })
+    document.addEventListener('click', function() {
+        floats.style.display = 'none';
+    })
+</script>
