@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+</head>
+<body>
+<div id="demo">
+    {{text}} <br>
+    {{text.split(',').reverse().join(',')}} <br>
+    ----下边是使用计算属性得到的 <br>
+    {{ reverseText }}
+    <!--逻辑过长就会变得臃肿，难以维护，所以遇到复杂的逻辑时，应当使用计算属性-->
+    <hr>
+    计算属性的缓存： <br>
+    {{ now }} <br>
+    通过methods拿到的时间戳(方法需要加括号)： <br>
+    {{ thisTime()}}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript">
+    //需求：'123,456,789'编程789,456,123
+    var app = new Vue({
+        el:'#demo',
+        data:{
+            text:'123,456,789',
+            msg:'nihao'
+        },
+        //定义计算属性
+        computed:{
+            //如果计算属性直接跟一个function，默认的就是getter函数
+           reverseText:function(){
+                return this.text.split(',').reverse().join(',');
+            },
+            now:function(){
+               return Date.now();
+            }
+        },
+        methods:{
+            thisTime: function(){
+                return Date.now();
+            }
+        }
+    })
+</script>
+</body>
+</html>

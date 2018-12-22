@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        两个购物车总价:{{prices}}
+        <!--逻辑过长就会变得臃肿，难以维护，所以遇到复杂的逻辑时，应该使用计算属性-->
+
+    </div>
+    <!--环境搭建-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        //需求：计算购物车中所有物品的总价
+       var demo = new Vue({
+           el: "#demo",
+           data:{
+               
+               //第一个购物车
+               package1:[{
+                  name:'iPhone',
+                  price:6999 ,
+                  count:1
+               },
+               {
+                   name:'ipad',
+                   price:3200,
+                   count:2
+               }],
+               //第二个购物车
+               package2: [{
+                name:'iPhone8',
+                price:6999 ,
+                count:1
+               },
+               {
+                   name:'ipad',
+                   price:3200,
+                   count:5
+               }],
+           },
+           //定义计算属性
+           computed:{
+               prices:function(){
+                var prices = 0;
+               
+                for( var i=0;i<this.package1.length;i++){
+                    prices += this.package1[i].price * this.package1[i].count;
+                }
+                for( var j=0;j<this.package2.length;j++){
+                    prices += this.package2[j].price * this.package2[j].count;
+                }
+                 return prices;
+                 }
+           }
+
+       })
+    </script>
+</body>
+</html>
