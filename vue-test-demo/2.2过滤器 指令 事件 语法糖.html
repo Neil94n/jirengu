@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .transRed{
+            background-color: red;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="dateApp">
+        <hr>
+        <!--过滤器,| 后面接的是过滤器的名字-->
+        <!--  {{date}} <br>
+        {{date | formatDate}}
+        &lt;!&ndash;过滤器的串联&ndash;&gt;-->
+        <!--{{   data  | filter1  | filter2}}-->
+        <!--过滤器的参数-->
+        {{date | formatDate(66,99)}}
+        <hr>
+        指令和事件 <br>
+        v-text指令:
+        {{apple}} <br>
+        <span v-text="apple"></span>
+        <hr>
+        v-html指令: 解析html <br>
+        {{banana}}<br>
+        <span v-text="banana"></span> <br>
+        <span v-html="banana"></span>
+        <hr>
+        v-bind指令：绑定活的属性 <br>
+    <!--   <div class="{{className}}"></div>//拿不到
+    <div class="className"></div>//拿不到-->
+    <div v-bind:class = "className"></div>
+    <div :class = "className"></div>
+    <hr>
+    v-on指令：绑定事件监听器 <br>
+   <!-- 为按钮添加监听事件-->
+    <button v-on:click = "count">{{countnum}}</button>
+    <button @click = "count">{{countnum}}</button>
+
+    </div>
+    <!--搭建环境-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+    // 需求：在页面中实时显示当前时间
+    //在月份 日期 小时 小于10的时候补0
+    var plusDate =function(value){
+        return value<10? '0'+value : value
+    }
+    var app = new Vue({
+        el:"#dateApp",
+        data:{
+            date: new Date(),
+            apple: '苹果',
+            banana: '<span style="color:yellow">香蕉</span>',
+            className: 'transRed',
+            countnum:0
+        },
+        //定义过滤器
+        filters:{
+            //这里的value就是需要过滤的数据
+            formatDate:function(value,a,b){
+                //将字符串转化为date类型
+                var date = new Date(value);
+                var year = date.getFullYear();//年
+                var month = plusDate(date.getMonth()+1);//月
+                var day = plusDate(date.getDate());//日
+                var hours = plusDate(date.getHours());
+                var min = plusDate(date.getMinutes());
+                var sec = plusDate(date.getSeconds());
+            //将整理好的数据返回
+            return year + '--' + month + '--' + day + '   '+ hours + '--' + min + '--' + sec + a +b;           
+            }
+        },
+        methods:{
+            count:function(){
+                this.countnum = this.countnum +1;
+            }
+        },
+        mounted:function(){
+            var _this = this; //这里的this代表的就是Vue实例
+            //setInterval();定时器
+            this.time = setInterval(function(){
+                _this.date = new Date();
+            },1000)
+        },
+        beforeDestroy:function(){
+            //如果定时器存在，就清除定时器
+            if(this.timer){
+                clearInterval(this.timer)
+            }
+        }
+    })
+    </script>
+</body>
+</html>
