@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+绑定内联样式:键代表style的属性，值就代表属性对应的值了 <br>
+切记：：vue中只要是大写字母，都会给你转换成-加小写
+fontSize  font-size
+dsfASDghG 转化为---> dsf-a-s-dgh-g <br>
+<div id="app">
+    font-size
+    fontSize
+
+    <div v-bind:style="{'color':color,'font-size':fontSize+'px'}">
+        大家看看我把
+    </div>
+    <br>
+    style数组语法 <br>
+    <div v-bind:style="[styleA,styleB]">
+        大家看看我把
+    </div>
+    <button v-on:dbclick="plus" @click="plu">{{count}}</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+    // 需求：点击一个按钮。来回切换背景颜色为红，蓝
+    var app =   new Vue({
+        el:"#app",
+        data:{
+            color:'red',
+            fontSize:16,
+            count:0
+        },
+        methods:{
+            plu:function(){
+               var t =  setTimeout(function(){
+                if(t){
+                 console.log(this.$methods)
+                }
+                },500);
+            },
+              plus:function () {
+                  this.count++
+              }
+        }
+    })
+</script>
+</body>
+</html>
