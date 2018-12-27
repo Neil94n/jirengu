@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+在父组件里，向子组件传递消息
+<div id="app" style="border: 2px solid chartreuse;height: 360px;">
+    <h5 style="text-align: center">我是父组件</h5>
+    //v-bind使用与否的区别，还可以使用布尔值，对象进行测试
+    <child-component msg="[3,6,9]"></child-component>
+    <child-component :msg="[3,6,9]"></child-component>
+    <hr>使用v-bind进行数据的动态绑定---吧input中的msg传递给子组件
+    <input type="text" v-model="parentmsg">
+    <bind-component v-bind:msg="parentmsg"></bind-component>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            parentmsg:'今天的月亮真圆'
+        },
+        components:{
+            'child-component':{
+                props:['msg'],
+                template:'<div style="border: 2px solid red;height: 80px;">{{msg.length}}</div>',
+                data:function () {
+                    return{
+                        count:1
+                    }
+                }
+            },
+            'bind-component':{
+                props:['msg'],
+                template:'<div style="border: 2px solid red;height: 80px;">{{msg}}</div>',
+                data:function () {
+                    return{
+                        count:1
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
