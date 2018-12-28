@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的使用方法</title>
+    <style>
+        #app{
+            border: 2px solid black;
+            width: 600px;
+            height: 300px;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 3px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" >
+    <!--vue.js:597 [Vue warn]: Unknown custom element: <mycomponent> - -->
+    <my-component my-msg="lalala"></my-component>
+    <hr>
+    <input type="text" v-model="d">
+    <type-component :a="a" :b="b" :c="c" :d="d"  :f="f" :g="g"></type-component>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+
+    Vue.component('myComponent',{
+        props:['myMsg'],
+        template:'<div>{{abc}}</div>',
+        data:function () {
+            return{
+                abc:this.myMsg
+            }
+        }
+    })
+    Vue.component('typeComponent',{
+        props:{
+            a:String,
+            b:[String,Number],
+            //必须是布尔类型，默认是true,type--required----default
+            c:{
+                type: Boolean,
+                default:true
+            },
+            d:{
+                // Missing required prop: "d"
+                type:Number,
+                required:true
+            },
+            e:{
+                type:Array,
+                default:function () {
+                    return [666];
+                }
+            },
+            //自定义一个验证函数
+            f:{
+                validator:function(value){
+                    return value<10;
+                }
+            },
+            g:{
+                type:Function
+            }
+        },
+        template:'<div>{{a}}--{{b}}---{{c}}---{{d}} ---{{e[0]}} </div>',
+        data:function () {
+            return{
+                abc:this.myMsg
+            }
+        }
+    });
+
+    var app = new Vue({
+        el:'#app',
+        data: {
+            a: '1',
+            b: '666',
+            c: true,
+            d: 32423,
+            e: [],
+            f:3,
+            g:console.log()
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的使用方法</title>
+    <style>
+        #app{
+            border: 2px solid black;
+            width: 600px;
+            height: 300px;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 3px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" >
+    您现在的银行卡余额是{{total}}
+    <son-component @change="handleTotal"></son-component>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+//需求：通过加号按钮和减号按钮来给父组件传递数据
+    Vue.component('son-component',{
+        template:'<div>\
+                   <button @click="handleincrease">+1000</button> \
+                    <button @click="handlereduce">-1000</button>\
+                </div>',
+        data:function(){
+            return {
+                count:2000
+            }
+        },
+        methods:{
+            handleincrease:function () {
+                this.count= this.count +1000;
+                this.$emit('change',this.count);
+            },
+            handlereduce:function () {
+                this.count= this.count -1000;
+                this.$emit('change',this.count)
+            }
+        }
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+            total:2000
+        },
+        methods:{
+            handleTotal:function (value) {
+                //此处的形参value就是传递过来的数据
+                this.total= value;
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
