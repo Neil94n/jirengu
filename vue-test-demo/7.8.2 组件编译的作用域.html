@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的使用方法</title>
+    <style>
+        #app{
+            border: 2px solid black; width: 600px;height: 300px;font-weight: 700;
+            font-size: 16px;padding: 3px; margin: 0 auto;margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" >
+    <my-component v-show="childshow">
+    </my-component>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+
+    Vue.component('my-component',{
+        template:'<div v-show="childshow">我是一个组件</div>',
+        data:function () {
+            return{
+                message:'我是子组件的内容',
+                childshow:true
+            }
+        }
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'我是父组件的内容',
+            childshow:false
+        }
+    })
+
+</script>
+
+</body>
+</html>

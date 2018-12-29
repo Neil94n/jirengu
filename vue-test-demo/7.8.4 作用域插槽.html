@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的使用方法</title>
+    <style>
+        #app{
+            border: 2px solid black; width: 600px;height: 300px;font-weight: 700;
+            font-size: 16px;padding: 3px; margin: 0 auto;margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" >
+    <my-component>
+<!--        <template slot="abc" slot-scope="prop">
+            {{prop.text}}
+            {{prop.ss}}
+        </template>-->
+        <p  slot="abc" slot-scope="prop">
+            {{prop.text}}
+            {{prop.ss}}
+        </p>
+    </my-component>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+
+    Vue.component('my-component',{
+        template:'<div>\
+            <slot text="我是来自子组件的数据" ss="fdjkfjlsd" name="abc" >\
+            </slot>\
+        </div>'
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+
+        }
+    })
+
+</script>
+
+</body>
+</html>
