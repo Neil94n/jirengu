@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的使用方法</title>
+    <style>
+        #app{
+            border: 2px solid black; width: 600px;height: 300px;font-weight: 700;
+            font-size: 16px;padding: 3px; margin: 0 auto;margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" >
+    <my-component value="haha">
+
+    </my-component>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+    // this.text-----------context.props.text
+    //this.$slots.default ===  context.children
+    Vue.component('my-component',{
+        functional: true,//表示当前的vue实例无状态。无实例
+        render:function (createElement,context) {
+            return createElement('button',{
+                on:{
+                    click:function () {
+                        debugger
+                        var a = this;
+                        console.log(context)
+                        console.log(context.parent)
+                        // alert(context.parent.msg)
+                        // alert(context.props.value)
+                        alert(this.value)//undefined
+                    }
+                }
+            },'点击我学习context')
+        },
+        props:['value']
+
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+            msg:'我是父组件的内容'
+        }
+    })
+
+</script>
+
+</body>
+</html>

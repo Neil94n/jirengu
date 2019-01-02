@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的使用方法</title>
+    <style>
+        #app{
+            border: 2px solid black; width: 600px;height: 300px;font-weight: 700;
+            font-size: 16px;padding: 3px; margin: 0 auto;margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app" >
+<button @click="switchShow">点击切换美女</button>  {{show}}
+    <my-component :show="show">
+
+    </my-component>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+    //需求：点击按钮切换美女图片
+    Vue.component('my-component',{
+        props:['show'],
+        render:function (createElement) {
+            var imgsrc;
+            if(this.show){
+                imgsrc = 'img/001.jpg'
+            }else{
+                imgsrc = 'img/002.jpg'
+            }
+            return createElement('img',{
+                attrs:{
+                    src: imgsrc
+                },
+                style:{
+                    width:'600px',
+                    height:'400px'
+                }
+            });
+        }
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+            show: false
+        },
+        methods:{
+            switchShow:function () {
+                this.show = !this.show
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
